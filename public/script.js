@@ -93,16 +93,11 @@ const App = {
         if (!this.currentUser) return;
 
         try {
-            const now = Date.now()
-            const durationMs = now - this.sessionStartTime
-            const durationMinutes = Math.round(durationMs / 1000)
-
             await fetch(`/api/logout`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ 
                     id: this.currentUser.id, 
-                    duration: durationMinutes 
                 })
             })
 
@@ -149,45 +144,12 @@ const App = {
                     <td class="text-center"><div id="${sparkId}" style="width:100px; height:30px; display:inline-block"></div></td>
                 `
                 tbody.appendChild(tr)
-                this.drawActivityChart(sparkId, u.activity_data || [])
             })
             this.updateToolbar()
         } catch (e) {
             console.error(e)
             this.showError(e.message)
         }
-    },
-
-    drawActivityChart(id, data) {
-        const el = document.getElementById(id)
-        if (!el) return
-
-        if (!data || data.length === 0) {
-            data = [0]
-        }
-
-        const displayData = data.slice(-20)
-        const count = displayData.length
-
-        const maxVal = Math.max(...displayData, 10)
-
-        const width = 100
-        const height = 30
-        const gap = 2
-        const barWidth = (width / count) - gap
-
-        let svgContent = ''
-
-        displayData.forEach((minutes, i) => {
-            const barHeight = (minutes / maxVal) * height
-            const x = i * (width / count)
-            const y = height - barHeight
-            const color = minutes > 0 ? '#0d6efd' : '#dee2e6'
-
-            svgContent += `<rect x="${x}" y="${y}" width="${Math.max(0, barWidth)}" height="${barHeight}" fill="${color}" rx="1" ry="1" />`
-        })
-
-        el.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 ${width} ${height}">${svgContent}</svg>`
     },
 
     getStatusBadge(status) {

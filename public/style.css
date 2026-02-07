@@ -68,12 +68,6 @@ body {
     z-index: 1055;
 }
 
-.sparkline {
-    width: 100px;
-    height: 30px;
-    display: block;
-}
-
 .btn {
     border-radius: 4px;
     transition: none;

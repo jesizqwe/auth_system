@@ -70,17 +70,8 @@ class UserController {
     }
 
     async logoutUser(req, res) {
-        const {id, duration} = req.body
-        
         try {
-            if (!id) return res.status(400).json({message: "Не указан ID"})
-
-            await db.query(
-                'UPDATE users SET activity_data = array_append(activity_data, $1) WHERE id = $2', 
-                [duration, id]
-            )
-            
-            res.json({ success: true })
+            res.json({ success: true, message: 'Выход выполнен' })
         } catch (e) {
             console.error(e)
             res.status(500).json({ message: 'Ошибка при выходе' })
@@ -89,7 +80,7 @@ class UserController {
 
     async getUsers(req, res) {
         try {
-            const users = await db.query('SELECT id, name, email, status, registered_at, last_login, activity_data FROM users ORDER BY last_login DESC')
+            const users = await db.query('SELECT id, name, email, status, registered_at, last_login FROM users ORDER BY last_login DESC')
             res.json(users.rows)
         } catch (e) {
             res.status(500).json({message: 'Ошибка при получении пользователей'})
