@@ -1,4 +1,4 @@
-const API_URL = '/api'
+// const API_URL = '/api'
         
 const App = {
     currentUser: null,
@@ -26,7 +26,7 @@ const App = {
     },
 
     async login(email, password) {
-        const res = await fetch(`${API_URL}/login`, {
+        const res = await fetch(`/api/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ email, password })
@@ -38,7 +38,7 @@ const App = {
     },
 
     async register(name, email, password) {
-        const res = await fetch(`${API_URL}/user`, {
+        const res = await fetch(`/api/user`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({name, email, password})
@@ -49,13 +49,13 @@ const App = {
     },
 
     async getUsers() {
-        const res = await fetch(`${API_URL}/user`)
+        const res = await fetch(`/api/user`)
         if (!res.ok) throw new Error('Ошибка загрузки')
         return await res.json()
     },
 
     async updateStatus(ids, status) {
-        await fetch(`${API_URL}/user`, {
+        await fetch(`/api/user`, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ids, status})
@@ -63,7 +63,7 @@ const App = {
     },
 
     async deleteUsers(ids) {
-        await fetch(`${API_URL}/user`, {
+        await fetch(`/api/user`, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ids})
@@ -71,7 +71,7 @@ const App = {
     },
 
     async deleteUnverified() {
-        await fetch(`${API_URL}/user/unverified`, {method: 'DELETE'})
+        await fetch(`/api/user/unverified`, {method: 'DELETE'})
     },
 
     showLogin() {this.switchView('view-login')},
@@ -97,7 +97,7 @@ const App = {
             const durationMs = now - this.sessionStartTime
             const durationMinutes = Math.round(durationMs / 1000)
 
-            await fetch(`${API_URL}/logout`, {
+            await fetch(`/api/logout`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ 
