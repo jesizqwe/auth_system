@@ -1,4 +1,4 @@
-const API_URL = 'auth-system-tawny.vercel.app/api'
+const API_URL = '/api'
         
 const App = {
     currentUser: null,
