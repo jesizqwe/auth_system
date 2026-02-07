@@ -13,7 +13,5 @@ app.use('/api', userRouter)
 
 module.exports = app
 
-if (require.main === module) {
-    const PORT = process.env.PORT || 8080
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
-}
+const PORT = process.env.PORT || 8080
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
