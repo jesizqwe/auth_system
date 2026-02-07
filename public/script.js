@@ -131,8 +131,6 @@ const App = {
                 const date = new Date(u.last_login).toLocaleDateString('ru-RU') + ' ' + new Date(u.last_login).toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})
                 const regDate = new Date(u.registered_at).toLocaleDateString('ru-RU')
 
-                const sparkId = 'spark-' + u.id
-
                 const tr = document.createElement('tr')
                 tr.innerHTML = `
                     <td class="text-center"><input type="checkbox" class="user-check" value="${u.id}"></td>
@@ -141,7 +139,6 @@ const App = {
                     <td><span class="badge ${this.getStatusBadge(u.status)}">${this.getStatusText(u.status)}</span></td>
                     <td>${regDate}</td>
                     <td class="text-end text-nowrap">${date}</td>
-                    <td class="text-center"><div id="${sparkId}" style="width:100px; height:30px; display:inline-block"></div></td>
                 `
                 tbody.appendChild(tr)
             })
