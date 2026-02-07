@@ -1,4 +1,4 @@
-const API_URL = 'https://auth-system-git-main-jesizs-projects.vercel.app//api'
+const API_URL = 'auth-system-tawny.vercel.app/api'
         
 const App = {
     currentUser: null,
