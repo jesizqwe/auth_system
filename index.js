@@ -7,7 +7,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use(express.static('public'))
+app.use(express.static('static'))
 app.use('/api', userRouter)
 
 module.exports = app
